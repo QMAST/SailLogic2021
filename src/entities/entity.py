@@ -25,3 +25,17 @@ class Entity():
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
         self.last_updated_by = created_by
+
+class CommandEntity():
+    id = Column(Integer, primary_key=True)
+    created_at = Column(DateTime)
+    #updated_at = Column(DateTime)
+    #last_updated_by = Column(String)
+    #commandID = Column(String)
+    #commandValue = Column(String)
+    
+    def __init__(self, commandID, commandValue):
+        self.created_at = datetime.now()
+        #self.updated_at = datetime.now()
+        #self.commandID = commandID
+        #self.commandValue = commandValue

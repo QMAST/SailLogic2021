@@ -6,10 +6,9 @@ from .entity import Entity, Base
 
 from marshmallow import Schema, fields
 
-
-### Sail Model - to delete.
-class SailLogicModel(Entity, Base):
-    __tablename__ = 'SailLogicModels'
+### Existing state, output from boat.
+class ExistingState(Entity, Base):
+    __tablename__ = 'ExistingStates'
 
     title = Column(String)
     description = Column(String)
@@ -18,11 +17,12 @@ class SailLogicModel(Entity, Base):
         Entity.__init__(self, created_by)
         self.title = title
         self.description = description
-    
-class SailLogicSchema(Schema):
-    id = fields.Number()
+
+class ExistingStateSchema(Schema):
     title = fields.Str()
     description = fields.Str()
-    created_at = fields.DateTime()
     updated_at = fields.DateTime()
-    last_updated_by = fields.Str()
+    windSpeed = fields.Number()
+    windDirection = fields.Number()
+    boatSpeed = fields.Number()
+    boatDirection = fields.Number()

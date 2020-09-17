@@ -15,3 +15,5 @@ In a shell run these commands to install dependencies.
     pip3 install pipenv
     npm install -g @angular/cli
 
+To setup database using docker
+    docker run --name sail_logic_db     -p 5432:5432     -e POSTGRES_DB=sail_logic     -e POSTGRES_PASSWORD=Sa1lL0gic     -d postgres
