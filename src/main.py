@@ -14,7 +14,8 @@ CORS(app)
 
 # if needed, generate database schema
 Base.metadata.create_all(engine)
-
+# TODO define existing state schema and fix up endpoints
+"""
 ### Existing state
 @app.route('/existingState')
 def get_existing_state():
@@ -48,7 +49,7 @@ def add_model():
     new_model = ExistingStateSchema().dump(model)
     session.close()
     return jsonify(new_model), 201
-
+"""
 ### sail command
 @app.route('/sailLogicCommand')
 def get_command():
@@ -67,21 +68,17 @@ def get_command():
 ### sail command post post
 @app.route('/sailLogicCommand', methods=['POST'])
 def add_command():
-    print("received command post")
+    #Quick little check, leaving this in for now
+    print(Base.metadata.tables.keys())
+    print(Base.metadata.tables)
     # mount exam object
-    print(request.values)
-    print("postedcommand")
     posted_command = SailLogicCommandSchema(only=('commandID', 'commandValue'))\
         .load(request.get_json())
-    print(posted_command)
-    print("AHHHHHHH")
     model = SailLogicCommand(**posted_command, created_by="HTTP post request")
-
     # persist exam
     session = Session()
     session.add(model)
     session.commit()
-
     # return created exam
     new_model = SailLogicCommandSchema().dump(model)
     session.close()

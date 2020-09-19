@@ -6,16 +6,11 @@ from .entity import Entity, Base, CommandEntity
 
 from marshmallow import Schema, fields
 
-class SailLogicCommand(Entity, Base):
+class SailLogicCommand(CommandEntity, Base):
     __tablename__ = 'SailLogicCommand'
 
-    commandID = Column(String)
-    commandValue = Column(String)
-
     def __init__(self, commandID, commandValue, created_by):
-        Entity.__init__(self, created_by)
-        self.commandID = commandID
-        self.commandValue = commandValue
+        CommandEntity.__init__(self, created_by, commandID, commandValue)
     
 ### Sail commands, input to boat.
 class SailLogicCommandSchema(Schema):

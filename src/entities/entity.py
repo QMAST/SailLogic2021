@@ -14,7 +14,7 @@ Session = sessionmaker(bind=engine)
 
 Base = declarative_base()
 
-
+# TODO we only need one superclass, its hacky having three
 class Entity():
     id = Column(Integer, primary_key=True)
     created_at = Column(DateTime)
@@ -29,13 +29,26 @@ class Entity():
 class CommandEntity():
     id = Column(Integer, primary_key=True)
     created_at = Column(DateTime)
-    #updated_at = Column(DateTime)
-    #last_updated_by = Column(String)
-    #commandID = Column(String)
-    #commandValue = Column(String)
+    updated_at = Column(DateTime)
+    last_updated_by = Column(String)
+    commandID = Column(String)
+    commandValue = Column(String)
     
-    def __init__(self, commandID, commandValue):
+    def __init__(self, created_by, commandID, commandValue):
         self.created_at = datetime.now()
-        #self.updated_at = datetime.now()
-        #self.commandID = commandID
-        #self.commandValue = commandValue
+        self.updated_at = datetime.now()
+        self.last_updated_by = created_by
+        self.commandID = commandID
+        self.commandValue = commandValue
+
+#TODO figure out list of sensors
+class ExistingStateEntity():
+    id = Column(Integer, primary_key=True)
+    created_at = Column(DateTime)
+    updated_at = Column(DateTime)
+    last_updated_by = Column(String)
+    
+    def __init__(self, created_by, commandID, commandValue):
+        self.created_at = datetime.now()
+        self.updated_at = datetime.now()
+        self.last_updated_by = created_by
