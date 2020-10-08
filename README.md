@@ -33,3 +33,15 @@ To tear down database
 
 To run the backend
     ./bootstrap &
+
+# Testing
+To test using REST endpoints use postman. You can also use curl if you would like but I've found it to be a nightmare.
+
+1. Install Postman
+2. Create a request by setting the body of the request (set as raw, with content type set to json) to something like
+    {
+    "commandID": "test1",
+    "commandValue": "123"
+    }  
+3.  Set the request type to POST and the adddress to http://0.0.0.0:5000/sailLogicCommand
+4.  Hit send, this should create a new object in the database with the values you sent. This should be viewable using sailcontrol.

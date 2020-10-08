@@ -69,17 +69,14 @@ def get_command():
 @app.route('/sailLogicCommand', methods=['POST'])
 def add_command():
     #Quick little check, leaving this in for now
-    print(Base.metadata.tables.keys())
-    print(Base.metadata.tables)
-    # mount exam object
+    #print(Base.metadata.tables.keys())
+    #print(Base.metadata.tables)
     posted_command = SailLogicCommandSchema(only=('commandID', 'commandValue'))\
         .load(request.get_json())
     model = SailLogicCommand(**posted_command, created_by="HTTP post request")
-    # persist exam
     session = Session()
     session.add(model)
     session.commit()
-    # return created exam
     new_model = SailLogicCommandSchema().dump(model)
     session.close()
     return jsonify(new_model), 201
