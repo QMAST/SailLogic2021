@@ -31,6 +31,11 @@ To tear down database
         docker rm {pid}
     Note: you should do this whenever you change the schemas
 
+To start the enviroment:
+pipenv --three
+pipenv install 
+pipenv install sqlalchemy psycopg2-binary
+    (maybe)
 To run the backend
     ./bootstrap &
 
